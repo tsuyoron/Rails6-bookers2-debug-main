@@ -1,4 +1,15 @@
 <div class='container'>
+    <% if @book.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@book.errors.count, "error") %>が原因でこの記事を保存できませんでした</h2>
+        <ul>
+          <% @book.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
   		<h1>Editing Book</h1>
