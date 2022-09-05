@@ -32,12 +32,12 @@ class UsersController < ApplicationController
   # フォロー一覧ページとフォロワー一覧ページ用のアクション
   def follows
     user = User.find(params[:id])
-    @users = user.following_user.page(params[:page]).per(3).reverse_order
+    @users = user.following_user
   end
 
   def followers
     user = User.find(params[:id])
-    @users = user.follower_user.page(params[:page]).per(3).reverse_order
+    @users = user.follower_user
   end
 
   private
