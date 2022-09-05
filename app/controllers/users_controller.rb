@@ -5,6 +5,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+
+    #フォロー数とフォロワー数を表示するための追記
+    # @posts = @user.posts.page(params[:page]).reverse_order
+    @following_users = @user.following_user
+    @follower_users = @user.follower_user
   end
 
   def index
@@ -22,6 +27,17 @@ class UsersController < ApplicationController
     else
       render "edit"
     end
+  end
+
+  # フォロー一覧ページとフォロワー一覧ページ用のアクション
+  def follows
+    user = User.find(params[:id])
+    @users = user.following_user.page(params[:page]).per(3).reverse_order
+  end
+
+  def followers
+    user = User.find(params[:id])
+    @users = user.follower_user.page(params[:page]).per(3).reverse_order
   end
 
   private
