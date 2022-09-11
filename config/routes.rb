@@ -11,12 +11,14 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:create, :destroy]
   end
 
-
   resources :users, only: [:index,:show,:edit,:update] do
     member do
       get :follows, :followers
     end
     resource :relationships, only: [:create, :destroy]
   end
+
+  get "search" => "searches#search"
+  get "search_result" => "searches#search",as: "search_result"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
